@@ -171,23 +171,16 @@ core.add(
     }());
 
 var bookmarkToElement = function(mark, sandbox){
-    if (mark.hasOwnProperty("hyperlink")){
-	var template = document.querySelector("#hyperlink-template");
-	var hyperlink = template.cloneNode(true);
-	hyperlink.id = "mark-" + mark["@"] + "-" + mark["~"];
-	sandbox.offdom.find(hyperlink, ".who")[0].textContent = mark["@"];
-	sandbox.offdom.find(hyperlink, ".hyperlink-url")[0].href = mark.hyperlink;
-	sandbox.offdom.find(hyperlink, ".hyperlink-title")[0].textContent = mark.title;
-	sandbox.offdom.find(hyperlink, ".when")[0].textContent = humanTime(mark["~"]);
-	return hyperlink;
-    } else if (mark.hasOwnProperty("#")) {
-	var comment = document.querySelector("#comment-template").cloneNode(true);
-	comment.id = "mark-" + mark["@"] + "-" + mark["~"];
-	sandbox.offdom.find(comment, ".who")[0].textContent = mark["@"];
-	sandbox.offdom.find(comment, ".what")[0].textContent = mark["#"];
-	sandbox.offdom.find(comment, ".when")[0].textContent = humanTime(mark["~"]);
-	return comment;
+    var domain = function(hyperlink){
+	return hyperlink.match("[^/]+//w?w?w?[\.]?([^\/:]+)")[1]
     }
+    var template = document.querySelector("#hyperlink-template");
+    var hyperlink = template.cloneNode(true);
+    hyperlink.id = "mark-" + mark["@"] + "-" + mark["~"];
+    sandbox.offdom.find(hyperlink, ".hyperlink-url")[0].href = mark.hyperlink;
+    sandbox.offdom.find(hyperlink, ".hyperlink-title")[0].textContent = mark.title;
+    sandbox.offdom.find(hyperlink, ".hyperlink-domain")[0].textContent = domain(mark.hyperlink);
+    return hyperlink;
 };
 
 var humanTime = function(then){
@@ -359,19 +352,7 @@ core.add(
             var reader = new FileReader();
             reader.onload = function(event){
                 alert("bookmark import temporarily disabled");
-                // var contents = event.target.result;
-                // var bookmarkRegex = /<[Aa][\W|\w]+?[Aa]>/gi;
-                // var matches = contents.match(bookmarkRegex);
-                // var bookmarks = [];
-                // for (var each in matches){
-                //     var dom = HTMLtoDOM(matches[each]);
-                //     var element = $(dom).find("a")[0];
-                //     var bookmark = netscapeElementToMark(element);
-                //     if (bookmark){
-                //         bookmarks.push(bookmark);
-                //     }
-                // }
-                // sandbox.publish("new-marks", bookmarks);
+
                 button.textContent = "Imported!";
             };
             reader.readAsText(bookmarksFile, "UTF-8");
