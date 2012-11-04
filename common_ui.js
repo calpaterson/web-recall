@@ -5,7 +5,7 @@ core.add(
         var button;
 
         var login = function(){
-            button.classList.add("disabled");
+	    sandbox.addClass(button, "disabled");
             button.textContent = "Logging in...";
             sandbox.publish(
             "login", {
@@ -21,7 +21,7 @@ core.add(
         var loginSuccess = function(user){
             hide();
             button.textContent = "Login Again";
-            button.classList.remove("disabled");
+	    sandbox.removeClass(button, "disabled");
             sandbox.publish("show-post-login");
         };
 
@@ -31,16 +31,16 @@ core.add(
 
         var loginError = function(user){
             button.textContent = "Try Again";
-            button.classList.remove("disabled");
+	    sandbox.removeClass(button, "disabled");
         };
 
         var show = function(){
-            sandbox.find()[0].hidden = false;
+	    sandbox.show()
             return false;
         };
 
         var hide = function(){
-            sandbox.find()[0].hidden = true;
+	    sandbox.hide()
             return false;
         };
 

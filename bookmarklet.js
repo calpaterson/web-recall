@@ -24,11 +24,11 @@ core.add(
             var tabSelection = sandbox.get(
                 "bookmarklet-tab-selection");
             if (tabSelection){
-                sandbox.find(tabSelection)[0].classList.add("active");
-                sandbox.find(tabSelection.slice(0, -8))[0].classList.add("active");
+                sandbox.addClass(sandbox.find(tabSelection)[0], "active");
+                sandbox.addClass(sandbox.find(tabSelection.slice(0, -8))[0], "active");
             } else {
-                sandbox.find("#hyperlink-tab-content")[0].classList.add("active");
-                sandbox.find("#hyperlink-tab")[0].classList.add("active");
+                sandbox.addClass(sandbox.find("#hyperlink-tab-content")[0], "active");
+                sandbox.addClass(sandbox.find("#hyperlink-tab")[0], "active");
             }
         };
 
@@ -52,7 +52,7 @@ core.add(
 
         var makeMark = function(event){
             var button = sandbox.find("#mark-button")[0];
-            button.classList.add("disabled");
+	    sandbox.addClass(button, "disabled");
             button.textContent = "Marking...";
             var unixtimeNow = function() {
                 return Math.floor(new Date().getTime() / 1000);
@@ -66,9 +66,9 @@ core.add(
                 if (private_){
                     mark["%private"] = true;
                 }
-                if (sandbox.find("#comment-tab-content")[0].classList.contains("active")){
+		if (sandbox.hasClass(sandbox.find("#comment-tab-content")[0], "active")){
                     mark["#"] = sandbox.find("#comment-body")[0].value;
-                } else if (sandbox.find("#hyperlink-tab-content")[0].classList.contains("active")){
+                } else if (sandbox.hasClass(sandbox.find("#hyperlink-tab-content")[0], "active")){
                     mark.title = sandbox.find("#hyperlink-title")[0].value;
                     mark.hyperlink = sandbox.find("#hyperlink-url")[0].value;
                 }
@@ -100,7 +100,7 @@ core.add(
                     },
                     "failure": function(){
                         button.textContent = "Failure!";
-                        button.classList.remove("disabled");
+			sandbox.removeClass(button, "disabled");
                     },
                     "mark": mark
                 };

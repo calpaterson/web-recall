@@ -20,12 +20,12 @@ core.add(
         var sandbox;
 
         var show = function(){
-            sandbox.find()[0].hidden = false;
+	    sandbox.show()
             return false;
         };
 
         var hide = function(){
-            sandbox.find()[0].hidden = true;
+	    sandbox.hide();
             return false;
         };
         return function(sandbox_){
@@ -44,7 +44,7 @@ core.add(
 
         var verify = function(){
             var button = sandbox.find("#v-e-submit")[0];
-            button.classList.add("disabled");
+	    sandbox.addClass(button, "disabled");
             button.textContent = "Verifying...";
 
             sandbox.publish(
@@ -61,20 +61,20 @@ core.add(
         };
 
         var show = function(data){
-            sandbox.find()[0].hidden = false;
+	    sandbox.show()
             token = data.split("/")[2];
             return false;
         };
 
         var hide = function(){
-            sandbox.find()[0].hidden = true;
+	    sandbox.hide()
             return false;
         };
 
         var failure = function(){
             var button = sandbox.find("#v-e-submit")[0];
             button.textContent = "Try Again";
-            button.classList.remove("disabled");
+	    sandbox.removeClass(button, "disabled");
         };
 
         return function(sandbox_){
@@ -94,7 +94,7 @@ core.add(
 
         var send = function(){
             var button = sandbox.find("#r-i-submit")[0];
-            button.classList.add("disabled");
+	    sandbox.addClass(button, "disabled");
             button.textContent = "Sending...";
 
             var data = {};
@@ -130,7 +130,7 @@ core.add(
                     }
                 },
                 "post",
-                recall_config["api-base-url"] + "/people/" + data.email + "/",
+                sandbox.api() + "/people/" + data.email + "/",
                 JSON.stringify(data),
                 null,
                 {"Content-Type": "application/json"}
@@ -146,21 +146,19 @@ core.add(
         var failure = function(){
             var button = sandbox.find("#r-i-submit")[0];
             button.textContent = "Error (try again?)";
-            button.classList.remove("disabled");
+	    sandbox.removeClass(button, disabled);
         };
 
         var changeType = function(event){
             var realNameID = "#r-i-real-name";
             var pseudonymID = "#r-i-pseudonym-div";
-            if (typeShowing === realNameID){
-                sandbox.find(realNameID)[0].hidden = true;
-                sandbox.find(pseudonymID)[0].hidden = false;
-                typeShowing = pseudonymID;
-            } else if (typeShowing === pseudonymID){
-                sandbox.find(pseudonymID)[0].hidden = true;
-                sandbox.find(realNameID)[0].hidden = false;
-                typeShowing = realNameID;
-            }
+	    sandbox.hide(typeShowing);
+	    if (typeShowing === realNameID){
+		typeShowing = pseudonymID;
+	    } else {
+		typeShowing = realNameID;
+	    }
+	    sandbox.show(typeShowing);
         };
 
         return function(sandbox_){
@@ -199,7 +197,7 @@ core.add(
 
         var search = function(event){
             var button = sandbox.find("#v-search-button")[0];
-            button.classList.add("disabled");
+	    sandbox.addClass(button, "disabled");
             button.textContent = "Searching...";
             var displayMarks = function(marks){
                 sandbox.deleteContentsOf("#list-of-marks");
@@ -209,11 +207,10 @@ core.add(
 			    "#list-of-marks",
 			    bookmarkToElement(marks[i], sandbox));
                     }
-
-                    button.classList.remove("disabled");
+		    sandbox.removeClass(button, "disabled");
                     button.textContent = "Seach Again?";
                 } else {
-                    button.classList.remove("disabled");
+		    sandbox.removeClass(button, "disabled");
                     button.textContent = "No results!";
                 }
 
@@ -225,12 +222,12 @@ core.add(
         };
 
         var show = function(){
-            sandbox.find()[0].hidden = false;
+	    sandbox.show()
             return false;
         };
 
         var hide = function(){
-            sandbox.find()[0].hidden = true;
+	    sandbox.hide()
             return false;
         };
 
@@ -255,7 +252,7 @@ core.add(
 					       email = email_;
 					       password = password_;
 					   }});
-	    var url = recall_config["api-base-url"]
+	    var url = sandbox.api()
 		+ "/bookmarks/" + email + "/all/recent/";
             sandbox.asynchronous(
                 function(status, content, headers){
@@ -281,12 +278,12 @@ core.add(
 
         var show = function(){
 	    getRecentBookmarks()
-            sandbox.find()[0].hidden = false;
+	    sandbox.show()
             return false;
         };
 
         var hide = function(){
-            sandbox.find()[0].hidden = true;
+	    sandbox.hide()
             return false;
         };
 
@@ -303,12 +300,12 @@ core.add(
         var sandbox;
 
         var hide = function(){
-            sandbox.find()[0].hidden = true;
+	    sandbox.hide()
             return false;
         };
 
         var show = function(){
-            sandbox.find()[0].hidden = false;
+	    sandbox.show()
             return false;
         };
         var netscapeElementToMark = function(element, email){
@@ -346,7 +343,7 @@ core.add(
 
         var importBookmarks = function(){
             var button = sandbox.find("#m-i-import")[0];
-            button.classList.add("disabled");
+	    sandbox.addClass(button, "disabled");
             button.textContent = "Importing...";
             var bookmarksFile = sandbox.find("#m-i-bookmarks-file-input")[0].files[0];
             var reader = new FileReader();
@@ -363,11 +360,11 @@ core.add(
             var insert = function(status, content){
                 var bookmarkletAnchor = sandbox.find("#bookmarklet-a")[0];
                 var url = "javascript:" + content.replace(
-                    "WWW_BASE_URL", recall_config["www-base-url"]);
+                    "WWW_BASE_URL", sandbox.web());
                 bookmarkletAnchor.href = url;
             };
 
-            var trampolineURL = recall_config["www-base-url"] + "/bookmarklet-trampoline";
+            var trampolineURL = sandbox.web() + "/bookmarklet-trampoline";
             
             sandbox.asynchronous(
                 insert,
@@ -393,7 +390,7 @@ core.add(
         var moveTo = function(show){
             sandbox.publish("hide-all");
             sandbox.publish("show-" + show, window.location.pathname);
-            if (typeof history !== "undefined"){
+            if (typeof history !== "undefined" && history.hasOwnProperty("pushState")){
                 history.pushState({}, "Recall", "/" + show + "/");
             }
         };

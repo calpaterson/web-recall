@@ -34,7 +34,7 @@ core.add(
             sandbox.asynchronous(
                 cb,
                 "get",
-                recall_config["api-base-url"] + "/people/" + message.email + "/self",
+                sandbox.api() + "/people/" + message.email + "/self",
                 {},
                 "application/json",
                 {"X-Email": message.email,
@@ -75,7 +75,7 @@ core.add(
                     }
                 },
                 "post",
-                recall_config["api-base-url"] + "/people/" + message.email + "/" + message.email_key,
+                sandbox.api() + "/people/" + message.email + "/" + message.email_key,
                 JSON.stringify({"email_key": message.email_key,
                                 "email" : message.email,
                                 "password": message.password}),
@@ -103,7 +103,7 @@ core.add(
 
         var send = function(message){
             authenticate();
-            url = recall_config["api-base-url"] + "/bookmarks/";
+            url = sandbox.api() + "/bookmarks/";
             if (message.mark["%private"]){
                 url += email + "/private/" + message.mark["~"] + "/";
             } else {
@@ -141,7 +141,7 @@ core.add(
 
         var marks = function(message){
             authenticate();
-            var url = recall_config["api-base-url"] + "/bookmarks/";
+            var url = sandbox.api() + "/bookmarks/";
             if (email === undefined){
                 url += "public/";
             } else {

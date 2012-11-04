@@ -25,6 +25,12 @@ makeSandbox = function(core, moduleName) {
     interface_.bind = function (element, event, handler){
         core.dom.bind(moduleName, element, event, handler);
     };
+    interface_.show = function(selector){
+	core.dom.show(moduleName, selector);
+    };
+    interface_.hide = function(selector){
+	core.dom.hide(moduleName, selector);
+    };
     interface_.create = function(tagName){
 	return core.dom.create(tagName);
     };
@@ -33,6 +39,15 @@ makeSandbox = function(core, moduleName) {
     };
     interface_.deleteContentsOf = function(selector){
 	core.dom.deleteContentsOf(moduleName, selector);
+    };
+    interface_.addClass = function(element, className){
+	core.dom.addClass(moduleName, element, className);
+    };
+    interface_.hasClass = function(element, className){
+	core.dom.hasClass(moduleName, element, className);
+    };
+    interface_.removeClass = function(element, className){
+	core.dom.removeClass(moduleName, element, className);
     };
     interface_.hiddenWrapHack = function(selector){
 	core.dom.hiddenWrapHack(moduleName, selector);
@@ -77,6 +92,24 @@ makeSandbox = function(core, moduleName) {
     };
     interface_.drop = function(key){
 	return localStorage.removeItem(moduleName + "$" + key);
+    };
+
+    // Urls
+    interface_.api = function(){
+	var hasCORS = new XMLHttpRequest().withCredentials !== undefined;
+	if (hasCORS){
+	    return recall_config["api-base-url"];
+	} else {
+	    return recall_config["nocors-base-url"];
+	}
+    };
+    interface_.web = function(){
+	var hasCORS = new XMLHttpRequest().withCredentials !== undefined;
+	if (hasCORS){
+	    return recall_config["www-base-url"];
+	} else {
+	    return recall_config["nocors-base-url"];
+	}
     };
 
     return interface_;

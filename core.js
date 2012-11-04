@@ -72,6 +72,20 @@ core = (
                     elements[index]["on" + eventName] = handler;
                 }
             },
+	    show: function(moduleName, selector){
+		if (selector !== undefined){
+		    this.queryWithin(moduleName, selector)[0].style.display = "inline";
+		} else {
+		    this.queryWithin(moduleName)[0].style.display = "inline";
+		}
+	    },
+	    hide: function(moduleName, selector){
+		if (selector !== undefined){
+		    this.queryWithin(moduleName, selector)[0].style.display = "none";
+		} else {
+		    this.queryWithin(moduleName)[0].style.display = "none";
+		}
+	    },
 	    create: function(tagName){
 		return document.createElement(tagName);
 	    },
@@ -84,6 +98,34 @@ core = (
                     parent.removeChild(parent.lastChild);
                 }
             },
+	    addClass: function(moduleName, element, className){
+		if (document.documentElement.classList) {
+		    element.classList.add(className);
+		} else {
+		    if (this.hasClass(element, className)) {
+			element.className += (element.className ? " " : "") + className;
+		    }
+		}
+	    },
+	    hasClass: function(moduleName, element, className){
+		if (document.documentElement.classList) {
+		    return element.classList.contains(className);
+		} else {
+		    if (!element || !element.className) {
+			return false;
+		    }
+		    var re = new RegExp('(^|\\s)' + className + '(\\s|$)');
+		    return element.className.match(re);
+		}
+	    },
+	    removeClass: function(moduleName, element, className){
+		if (document.documentElement.classList) {
+		    element.classList.remove(className);
+		} else {
+		    var regexp = new RegExp("(^|\\s)" + className + "(\\s|$)", "g");
+		    element.className = element.className.replace(regexp, "$2");
+		}
+	    },
             hiddenWrapHack : function(moduleName, selector){
                 var elements = this.queryWithin(moduleName, selector);
                 for(var index = 0; index < elements.length; index++){
