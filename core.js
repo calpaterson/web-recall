@@ -69,8 +69,15 @@ core = (
             bind: function(moduleName, selector, eventName, handler){
                 var elements = this.queryWithin(moduleName, selector);
                 for (var index = 0; index < elements.length; index++){
-                    elements[index]["on" + eventName] = handler;
-                }
+                    elements[index]["on" + eventName] = function(event){
+			if(typeof event === "undefined"){
+			    event = window.event;
+			    event.currentTarget = window.event.srcElement;
+			}
+			handler(event);
+			return false;
+		    };
+                };
             },
 	    show: function(moduleName, selector){
 		if (selector !== undefined){
@@ -181,6 +188,6 @@ core = (
     }()
 );
 
-document.addEventListener("DOMContentLoaded", function(){
+window.onload = function(){
     core.startAll();
-});
+};
