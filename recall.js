@@ -92,7 +92,7 @@ core.add(
 
         var typeShowing = "#r-i-real-name";
 
-        var send = function(){
+        var subscribe = function(){
             var button = sandbox.find("#r-i-submit")[0];
 	    sandbox.addClass(button, "disabled");
             button.textContent = "Sending...";
@@ -120,21 +120,36 @@ core.add(
                     return false;
                 }
             }
-
-            sandbox.asynchronous(
-                function(status, content){
-                    if(status !== 202){
-                        failure();
-                    } else {
-                        success();
-                    }
-                },
-                "post",
-                sandbox.api() + "/people/" + data.email + "/",
-                JSON.stringify(data),
-                null,
-                {"Content-Type": "application/json"}
+    
+	    var sendToCalPaterson = function(error, result) {
+		data.paymillToken = result.token;
+		sandbox.asynchronous(
+                    function(status, content){
+			if(status !== 202){
+                            failure();
+			} else {
+                            success();
+			}
+                    },
+                    "post",
+                    sandbox.api() + "/people/" + data.email + "/",
+                    JSON.stringify(data_without_payment_info),
+                    null,
+                    {"Content-Type": "application/json"}
                 );
+	    };
+
+	    var sendToPaymill = function() {
+		var paymentObject = {
+		    number: sandbox.find("#r-i-card-number")[0].value,
+		    cvc: sandbox.find("#r-i-cvc")[0].value,
+		    exp_month: sandbox.find("#r-i-card-expiry-month")[0].value,
+		    exp_year: sandbox.find("#r-i-card-expiry-year")[0].value,
+		    cardholdername: sandbox.find("#r-i-card-holder-name")[0].value
+		};
+		paymill.createToken(paymentObject, sendToCalPaterson);
+	    }();
+
             return false;
         };
 
@@ -163,7 +178,7 @@ core.add(
 
         return function(sandbox_){
             sandbox = sandbox_;
-            sandbox.bind("#r-i-submit", "click", send);
+            sandbox.bind("#r-i-submit", "click", subscribe);
             sandbox.bind("#r-i-type", "change", changeType);
         };
     }());
@@ -390,7 +405,7 @@ core.add(
         var moveTo = function(show){
             sandbox.publish("hide-all");
             sandbox.publish("show-" + show, window.location.pathname);
-            if (typeof history !== "undefined" && history.hasOwnProperty("pushState")){
+            if (typeof history !== "undefined" && typeof history.pushState !== "undefined"){
                 history.pushState({}, "Recall", "/" + show + "/");
             }
         };
@@ -406,12 +421,14 @@ core.add(
         };
 
         var flip = function(display){
-            display.hiding.map(function(id){
-                sandbox.find(id)[0].style.display = "none";
-            });
-            display.showing.map(function(id){
-                sandbox.find(id)[0].style.display = "";
-            });
+	    var hiding = display.hiding;
+	    var showing = display.showing;
+	    for(var i = 0; i<hiding.length; i++){
+                sandbox.find(hiding[i])[0].style.display = "none";
+            };
+	    for(var j = 0; j<showing.length; j++){
+                sandbox.find(showing[j])[0].style.display = "";
+            };
         };
 
         var vistorMode = function(){
