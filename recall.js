@@ -36,6 +36,64 @@ core.add(
     }());
 
 core.add(
+    "imprint",
+    function(){
+	var sandbox;
+
+	return function(sandbox_){
+	    sandbox = sandbox_;
+	    sandbox.bind("#i-privacy-policy", "click", function(){
+		sandbox.publish("show-privacy-policy")
+	    });
+	    sandbox.bind("#i-terms-and-conditions", "click", function(){
+		sandbox.publish("show-terms-and-conditions")
+	    });
+	}
+    }());
+
+core.add(
+    "privacy-policy",
+    function(){
+	var sandbox;
+	var show = function(){
+	    sandbox.show()
+	    return false;
+	};
+
+	var hide = function(){
+	    sandbox.hide();
+	    return false;
+	};
+
+	return function(sandbox_){
+	    sandbox = sandbox_;
+	    sandbox.subscribe("hide-all", hide)
+	    sandbox.subscribe("show-privacy-policy", show);
+	};
+    }());
+
+core.add(
+    "terms-and-conditions",
+    function(){
+	var sandbox;
+	var show = function(){
+	    sandbox.show()
+	    return false;
+	};
+
+	var hide = function(){
+	    sandbox.hide();
+	    return false;
+	};
+
+	return function(sandbox_){
+	    sandbox = sandbox_;
+	    sandbox.subscribe("hide-all", hide)
+	    sandbox.subscribe("show-terms-and-conditions", show);
+	};
+    }());
+
+core.add(
     "verify-email",
     function(){
         var sandbox;
@@ -101,7 +159,7 @@ core.add(
 
             data.email = sandbox.find("#r-i-email")[0].value;
             if (data.email.indexOf("@") === -1){
-                failure();
+                failure("Need a valid email address");
                 return false;
             }
 
@@ -110,13 +168,13 @@ core.add(
                 data.firstName = sandbox.find("#r-i-first-name")[0].value;
                 data.surname = sandbox.find("#r-i-surname")[0].value;
                 if (data.firstName === "" || data.surname === ""){
-                    failure();
+                    failure("Need a first name and a surname", true);
                     return false;
                 }
             } else if (typeSelect.selectedIndex === 1){
                 data.pseudonym = sandbox.find("#r-i-pseudonym")[0].value;
                 if (data.pseudonym === ""){
-                    failure();
+                    failure("Need a psuedonym", true);
                     return false;
                 }
             }
@@ -126,7 +184,7 @@ core.add(
 		sandbox.asynchronous(
                     function(status, content){
 			if(status !== 202){
-                            failure();
+                            failure("Unable to send signup details", true);
 			} else {
                             success();
 			}
@@ -147,7 +205,13 @@ core.add(
 		    exp_year: sandbox.find("#r-i-card-expiry-year")[0].value,
 		    cardholdername: sandbox.find("#r-i-card-holder-name")[0].value
 		};
-		paymill.createToken(paymentObject, sendToCalPaterson);
+		if(typeof(paymill) === "undefined"){
+		    failure(
+			"Unable to send payment details to secure server",
+			false)
+		} else {
+		    paymill.createToken(paymentObject, sendToCalPaterson);
+		}
 	    }();
 
             return false;
@@ -158,10 +222,16 @@ core.add(
             button.textContent = "Sent!";
         };
 
-        var failure = function(){
+        var failure = function(reason, canRetry){
             var button = sandbox.find("#r-i-submit")[0];
-            button.textContent = "Error (try again?)";
-	    sandbox.removeClass(button, disabled);
+	    if(typeof(reason) === "string"){
+		button.textContent = reason;
+	    } else {
+		button.textContent = "Error (try again?)";
+	    }
+	    if(canRetry){
+		sandbox.removeClass(button, "disabled");
+	    }
         };
 
         var changeType = function(event){

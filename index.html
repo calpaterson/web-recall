@@ -27,7 +27,7 @@
     <meta name="author" content="Cal Paterson">
 
     <link href="/third-party/bootstrap/bootstrap.css" rel="stylesheet">
-    <link href="/third-party/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/third-party/bootstrap/responsive.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
   </head>
 
@@ -83,7 +83,33 @@
 		<input id="r-i-pseudonym" type="text"
                        placeholder="Enter pseudonym here">
               </div>
-	      
+
+	      <div>
+		<label>Card-holder's Name (exactly)</label>
+		<input id="r-i-card-holder-name" type="text"/
+		       placeholder="Enter cardholder name here">
+	      </div>
+
+	      <div>
+		<label>Card number</label>
+		<input id="r-i-card-number" type="text" size="20"
+		       placeholder="Enter card number here">
+	      </div>
+
+	      <div>
+		<label>Expiry date (MM/YYYY)</label>
+		<input id="r-i-card-expiry-month" type="text" size="2"
+		       placeholder="MM" style="width: 1.4em">
+		<input id="r-i-card-expiry-year" type="text" size="4"
+		       placeholder="YY" style="width: 2.5em">
+	      </div>
+
+	      <div>
+		<label>CVC (three-digit number on reverse)</label>
+		<input id="r-i-cvc" type="text" size="4"
+		       placeholder="CVC" style="width: 2.5em">
+	      </div>
+
               <label>Email Address (Will be public)</label>
               <input id="r-i-email" type="text"
                      placeholder="Enter email address here"> <br/>
@@ -244,7 +270,29 @@
       
       </div>
 
+      <div id="privacy-policy" style="display: none">
+	If the glove fits, you must acquit.
+      </div>
+
+      <div id="terms-and-conditions" style="display: none">
+	No dogs (except guide dogs)
+      </div>
+
+      <div id="imprint">
+	Copyright 2012 <a href="https://calpaterson.com">Cal Paterson</a>.
+	<a id="i-terms-and-conditions" class="a-local"
+	   href="#">Terms and conditions</a>.
+	<a id="i-privacy-policy" href="#" class="a-local"
+	   >Privacy policy.</a>
+      </div>
+
     <!-- Javascript -->
+    <script type="text/javascript">
+      var PAYMILL_PUBLIC_KEY = '56668080487145b3fe9580713ad457b8';
+    </script>
+    <script type="text/javascript" src="https://bridge.paymill.com"
+	    defer="defer"></script>
+
     <script src="/config.js"></script>
     <script src="/core.js"></script>
     <script src="/sandbox.js"></script>

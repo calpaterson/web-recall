@@ -20,3 +20,13 @@ a:visited {
 .recall-show:visited {
     color: #0088cc;
 }
+
+#imprint {
+    position:absolute;
+    bottom: 0;
+    height: 2em;
+}
+
+#imprint .a-local {
+    color: #0088cc;
+}
