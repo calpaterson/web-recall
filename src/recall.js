@@ -56,7 +56,8 @@ core.add(
     function(){
 	var sandbox;
 	var show = function(){
-	    sandbox.show()
+	    sandbox.publish("hide-all");
+	    sandbox.show();
 	    return false;
 	};
 
@@ -77,7 +78,8 @@ core.add(
     function(){
 	var sandbox;
 	var show = function(){
-	    sandbox.show()
+	    sandbox.publish("hide-all");
+	    sandbox.show();
 	    return false;
 	};
 
@@ -180,7 +182,7 @@ core.add(
             }
     
 	    var sendToCalPaterson = function(error, result) {
-		data.paymillToken = result.token;
+		data.token = result.token;
 		sandbox.asynchronous(
                     function(status, content){
 			if(status !== 202){
@@ -191,7 +193,7 @@ core.add(
                     },
                     "post",
                     sandbox.api() + "/people/" + data.email + "/",
-                    JSON.stringify(data_without_payment_info),
+                    JSON.stringify(data),
                     null,
                     {"Content-Type": "application/json"}
                 );
