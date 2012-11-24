@@ -44,7 +44,7 @@ makeSandbox = function(core, moduleName) {
 	core.dom.addClass(moduleName, element, className);
     };
     interface_.hasClass = function(element, className){
-	core.dom.hasClass(moduleName, element, className);
+	return core.dom.hasClass(moduleName, element, className);
     };
     interface_.removeClass = function(element, className){
 	core.dom.removeClass(moduleName, element, className);
