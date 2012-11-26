@@ -36,12 +36,15 @@ core.add(
     }());
 
 core.add(
-    "imprint",
+    "footer",
     function(){
 	var sandbox;
 
 	return function(sandbox_){
 	    sandbox = sandbox_;
+	    sandbox.bind("#i-imprint", "click", function(){
+		sandbox.publish("show-imprint")
+	    });
 	    sandbox.bind("#i-privacy-policy", "click", function(){
 		sandbox.publish("show-privacy-policy")
 	    });
@@ -49,6 +52,29 @@ core.add(
 		sandbox.publish("show-terms-and-conditions")
 	    });
 	}
+    }());
+
+core.add(
+    "imprint",
+    function(){
+	var sandbox;
+	var show = function(){
+	    //mixpanel.track("Read Imprint");
+	    sandbox.publish("hide-all");
+	    sandbox.show();
+	    return false;
+	};
+
+	var hide = function(){
+	    sandbox.hide();
+	    return false;
+	};
+
+	return function(sandbox_){
+	    sandbox = sandbox_;
+	    sandbox.subscribe("hide-all", hide)
+	    sandbox.subscribe("show-imprint", show);
+	};
     }());
 
 core.add(

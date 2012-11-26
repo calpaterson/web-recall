@@ -21,12 +21,12 @@ a:visited {
     color: #0088cc;
 }
 
-#imprint {
+#footer {
     position:absolute;
     bottom: 0;
     height: 2em;
 }
 
-#imprint .a-local {
+#footer .a-local {
     color: #0088cc;
 }
