@@ -29,17 +29,18 @@
     <link href="/third-party/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="/third-party/bootstrap/responsive.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
+    <script src="/config.js"></script>
+    <script src="/mixpanel.js"></script>
   </head>
 
   <body>
     <div class="container">
 
-      <div id="navigation" class="row">
-        <div class="span2">
-          <h1>⇐ Recall</h1>
-        </div>
-        <div class="span8" style="font-size: large; margin: 0.5em;
-				  margin-left: 30px">
+      <div id="navigation" class="row"
+	   style="font-size: large; margin: 0.5em;
+		  margin-left: 30px">
+        <div class="span12">
+          <span style="font-weight: bold">⇐ Recall</span>
           <a id="show-about" class="recall-show" href="#">About</a>
           <a id="show-getting-started" class="recall-show" href="#">Getting Started</a>
 	  <a id="show-recent" class="recall-show" href="#">Recent</a>
@@ -61,8 +62,8 @@
 	      snap to retrieve that page you bookmarked last month.
 	  </div>
 	<div id="request-invite-form">
-          <div class="span6" style="text-align: center">
-            <form class="form-vertical" style="display: none">
+          <div class="span3" style="text-align: center">
+            <form class="form-vertical">
               <select id="r-i-type">
 		<option>Use my real name</option>
 		<option>Use a pseudonym</option>
@@ -112,9 +113,9 @@
               <input id="r-i-email" type="text"
                      placeholder="Enter email address here"> <br/>
               <button id="r-i-submit" class="btn btn-primary btn-large"
-                      type="submit">Request an Invite
+                      type="submit">Subscribe for £30/year
 		<p>
-		  <div style="font-size: small;">It's free!</div>
+		  <!-- <div style="font-size: small;">It's free!</div> -->
 	      </button>
             </form>
           </div>
@@ -341,7 +342,6 @@
     <script type="text/javascript" src="https://bridge.paymill.com"
 	    defer="defer"></script>
 
-    <script src="/config.js"></script>
     <script src="/core.js"></script>
     <script src="/sandbox.js"></script>
     <script src="/services.js"></script>

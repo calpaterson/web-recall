@@ -59,7 +59,6 @@ core.add(
     function(){
 	var sandbox;
 	var show = function(){
-	    //mixpanel.track("Read Imprint");
 	    sandbox.publish("hide-all");
 	    sandbox.show();
 	    return false;
@@ -185,9 +184,9 @@ core.add(
 
             var data = {};
 
-            data.email = sandbox.find("#r-i-email")[0].value;
-            if (data.email.indexOf("@") === -1){
-                failure("Need a valid email address");
+            data.private_email = sandbox.find("#r-i-email")[0].value;
+            if (data.private_email.indexOf("@") === -1){
+                failure("Need a valid email address", true);
                 return false;
             }
 
@@ -195,26 +194,32 @@ core.add(
             if (typeSelect.selectedIndex === 0){
                 data.firstName = sandbox.find("#r-i-first-name")[0].value;
                 data.surname = sandbox.find("#r-i-surname")[0].value;
+		data.email = (data.firstName + "." + data.surname +
+			      "@" + recall_config["shadowEmailDomain"]).toLowerCase();
                 if (data.firstName === "" || data.surname === ""){
                     failure("Need a first name and a surname", true);
                     return false;
                 }
             } else if (typeSelect.selectedIndex === 1){
                 data.pseudonym = sandbox.find("#r-i-pseudonym")[0].value;
+		data.email = (data.pseudonym +
+			      "@" + recall_config["shadowEmailDomain"]).toLowerCase();
                 if (data.pseudonym === ""){
                     failure("Need a psuedonym", true);
                     return false;
                 }
             }
     
-	    var sendToCalPaterson = function(error, result) {
+	    var sendToCalPaterson = function(result) {
 		data.token = result.token;
 		sandbox.asynchronous(
                     function(status, content){
 			if(status !== 202){
                             failure("Unable to send signup details", true);
 			} else {
-                            success();
+			    mixpanel.track("Subscribe");
+			    var button = sandbox.find("#r-i-submit")[0];
+			    button.textContent = "Sent!";
 			}
                     },
                     "post",
@@ -223,6 +228,14 @@ core.add(
                     null,
                     {"Content-Type": "application/json"}
                 );
+	    };
+
+	    var handleToken = function(error, result) {
+		if (error === null){
+		    sendToCalPaterson(result);
+		} else {
+		    failure("Problem with payment details", true);
+		}
 	    };
 
 	    var sendToPaymill = function() {
@@ -238,20 +251,16 @@ core.add(
 			"Unable to send payment details to secure server",
 			false)
 		} else {
-		    paymill.createToken(paymentObject, sendToCalPaterson);
+		    paymill.createToken(paymentObject, handleToken);
 		}
 	    }();
 
             return false;
         };
 
-        var success = function(){
-            var button = sandbox.find("#r-i-submit")[0];
-            button.textContent = "Sent!";
-        };
-
         var failure = function(reason, canRetry){
             var button = sandbox.find("#r-i-submit")[0];
+	    sandbox.addClass(button, "btn-danger");
 	    if(typeof(reason) === "string"){
 		button.textContent = reason;
 	    } else {

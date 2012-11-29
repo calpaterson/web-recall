@@ -48,8 +48,10 @@ core.add(
 
         var loggedIn = function(message){
           if (sandbox.has("email")){
+	      mixpanel.track("Return");
               message.success(sandbox.get("email"), sandbox.get("password"));
           } else {
+	      mixpanel.track("Visit");
               message.failure();
           }
         };
@@ -60,9 +62,11 @@ core.add(
             sandbox.asynchronous(
                 function(status, content){
                     if (status === 201){
-                        sandbox.publish("logged-in", {email: message.email,
-                                                      password: message.password});
-                        message.success();
+			var user = JSON.parse(content);
+                        sandbox.publish(
+			    "logged-in", {email: message.email,
+					  password: message.password});
+                        message.success(user);
                     } else {
                         if (status === 404) {
                             sandbox.publish("error", "Wrong link or email address");
