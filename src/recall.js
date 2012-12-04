@@ -135,7 +135,7 @@ core.add(
             sandbox.publish(
             "verify-email", {
                 "email_key": token,
-                "email": sandbox.find("#v-e-email")[0].value,
+                "email": sandbox.find("#v-e-email")[0].value + "@" + recall_config["shadowEmailDomain"],
                 "password": sandbox.find("#v-e-password")[0].value,
                 "success": function(){
                     sandbox.publish("show-post-login");
@@ -167,6 +167,47 @@ core.add(
             sandbox.bind("#v-e-submit", "click", verify);
             sandbox.subscribe("show-verify-email", show);
             sandbox.subscribe("hide-all", hide);
+        };
+    }());
+
+core.add(
+    "checked-out",
+    function(){
+	var sandbox;
+
+	var show = function(){
+	    var details = sandbox.get("details");
+	    sandbox.asynchronous(
+                function(status, content){
+		    if(status !== 202){
+                        failure("Unable to send signup details");
+		    } else {
+			success();
+		    }
+                },
+                "post",
+                sandbox.api() + "/people/" + details.email + "/",
+                JSON.stringify(details),
+                null,
+                {"Content-Type": "application/json"}
+            );
+	};
+
+	var failure = function(){};
+
+	var success = function(){
+	    sandbox.show();
+	};
+
+	var saveDetails = function(message){
+	    sandbox.set("details", message);
+	}
+
+
+        return function(sandbox_){
+            sandbox = sandbox_;
+	    sandbox.subscribe("subscription-details", saveDetails);
+	    sandbox.subscribe("show-checked-out", show);
         };
     }());
 
@@ -209,52 +250,11 @@ core.add(
                     return false;
                 }
             }
-    
-	    var sendToCalPaterson = function(result) {
-		data.token = result.token;
-		sandbox.asynchronous(
-                    function(status, content){
-			if(status !== 202){
-                            failure("Unable to send signup details", true);
-			} else {
-			    mixpanel.track("Subscribe");
-			    var button = sandbox.find("#r-i-submit")[0];
-			    button.textContent = "Sent!";
-			}
-                    },
-                    "post",
-                    sandbox.api() + "/people/" + data.email + "/",
-                    JSON.stringify(data),
-                    null,
-                    {"Content-Type": "application/json"}
-                );
-	    };
 
-	    var handleToken = function(error, result) {
-		if (error === null){
-		    sendToCalPaterson(result);
-		} else {
-		    failure("Problem with payment details", true);
-		}
-	    };
-
-	    var sendToPaymill = function() {
-		var paymentObject = {
-		    number: sandbox.find("#r-i-card-number")[0].value,
-		    cvc: sandbox.find("#r-i-cvc")[0].value,
-		    exp_month: sandbox.find("#r-i-card-expiry-month")[0].value,
-		    exp_year: sandbox.find("#r-i-card-expiry-year")[0].value,
-		    cardholdername: sandbox.find("#r-i-card-holder-name")[0].value
-		};
-		if(typeof(paymill) === "undefined"){
-		    failure(
-			"Unable to send payment details to secure server",
-			false)
-		} else {
-		    paymill.createToken(paymentObject, handleToken);
-		}
-	    }();
-
+	    mixpanel.track("Subscribe");
+	    sandbox.publish("subscription-details", data);
+	    sandbox.hide("#details-form");
+	    sandbox.show("#paypal-form");
             return false;
         };
 

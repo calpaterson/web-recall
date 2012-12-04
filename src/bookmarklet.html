@@ -30,28 +30,30 @@
     <link href="third-party/bootstrap/responsive.css"
           rel="stylesheet">
     <link href="style.css" rol="stylesheet">
+    <script src="/config.js"></script>
+    <script src="/mixpanel.js"></script>
   </head>
 
   <body>
 
     <div class="container">
 
-      <!-- Must be kept in sync with the version in index.html -->
-      <div id="login-form" class="row" hidden="true">
-	<div class="offset4 span4">
-	  <h3>Sign In to Recall</h3>
-	  <form class="form-vertical">
-	    <label>Email</label>
-	    <input id="login-form-email" type="email"
-		   placeholder="Enter email address here">
-	    <label>Password</label>
-	    <input id="login-form-password" type="password"
-		   placeholder="Enter password here">
-	    <br/>
-	    <button id="login-form-submit" class="btn btn-primary"
-		    type="submit">Login</button>
-	  </form>
-	</div>
+      <!-- Must be kept in sync with the version in bookmarklet.html -->
+      <div id="login-form" class="row" style="display: none">
+        <div class="offset4 span4 well">
+          <h3>Sign in</h3>
+          <form class="form-vertical">
+            <label>Username</label>
+            <input id="login-form-email" type="email"
+                   placeholder="Enter username here">
+            <label>Password</label>
+            <input id="login-form-password" type="password"
+                   placeholder="Enter password here">
+            <br/>
+            <button id="login-form-submit" class="btn btn-primary"
+                    type="submit">Login</button>
+          </form>
+        </div>
       </div>
 
       <div id="bookmarklet" class="row" hidden="true">
@@ -105,7 +107,6 @@
       </div>
       </form>
     </div>
-    <script src="config.js"></script>
     <script src="core.js"></script>
     <script src="sandbox.js"></script>
     <script src="services.js"></script>

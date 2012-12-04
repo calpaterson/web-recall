@@ -48,10 +48,8 @@ core.add(
 
         var loggedIn = function(message){
           if (sandbox.has("email")){
-	      mixpanel.track("Return");
               message.success(sandbox.get("email"), sandbox.get("password"));
           } else {
-	      mixpanel.track("Visit");
               message.failure();
           }
         };

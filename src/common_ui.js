@@ -9,7 +9,7 @@ core.add(
             button.textContent = "Logging in...";
             sandbox.publish(
             "login", {
-                "email": sandbox.find("#login-form-email")[0].value,
+                "email": sandbox.find("#login-form-email")[0].value + "@" + recall_config["shadowEmailDomain"],
                 "password": sandbox.find("#login-form-password")[0].value,
                 "success": loginSuccess,
                 "offline": offline,

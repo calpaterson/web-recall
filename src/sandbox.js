@@ -82,10 +82,10 @@ makeSandbox = function(core, moduleName) {
 
     // Module Storage
     interface_.get = function(key){
-        return localStorage.getItem(moduleName + "$" + key);
+        return JSON.parse(localStorage.getItem(moduleName + "$" + key));
     };
     interface_.set = function(key, value){
-        return localStorage.setItem(moduleName + "$" + key, value);
+        return localStorage.setItem(moduleName + "$" + key, JSON.stringify(value));
     };
     interface_.has = function(key){
 	return localStorage.getItem(moduleName + "$" + key) !== null;

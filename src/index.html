@@ -62,7 +62,19 @@
 	      snap to retrieve that page you bookmarked last month.
 	  </div>
 	<div id="request-invite-form">
-          <div class="span3" style="text-align: center">
+
+	  <div id="paypal-form" class="span3" style="text-align: center; display: none">
+	    Please now click through paypal to complete payment:
+
+	    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	      <input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="BJ3HHJF32SF7J">
+<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+	    </form>
+	  </div>
+
+          <div id="details-form" class="span3" style="text-align: center">
             <form class="form-vertical">
               <select id="r-i-type">
 		<option>Use my real name</option>
@@ -83,40 +95,40 @@
                        placeholder="Enter pseudonym here">
               </div>
 
-	      <div>
-		<label>Card-holder's Name (exactly)</label>
-		<input id="r-i-card-holder-name" type="text"/
-		       placeholder="Enter cardholder name here">
-	      </div>
+	      <!-- <div> -->
+	      <!-- 	<label>Card-holder's Name (exactly)</label> -->
+	      <!-- 	<input id="r-i-card-holder-name" type="text"/ -->
+	      <!-- 	       placeholder="Enter cardholder name here"> -->
+	      <!-- </div> -->
 
-	      <div>
-		<label>Card number</label>
-		<input id="r-i-card-number" type="text" size="20"
-		       placeholder="Enter card number here">
-	      </div>
+	      <!-- <div> -->
+	      <!-- 	<label>Card number</label> -->
+	      <!-- 	<input id="r-i-card-number" type="text" size="20" -->
+	      <!-- 	       placeholder="Enter card number here"> -->
+	      <!-- </div> -->
 
-	      <div>
-		<label>Expiry date (MM/YYYY)</label>
-		<input id="r-i-card-expiry-month" type="text" size="2"
-		       placeholder="MM" style="width: 1.4em">
-		<input id="r-i-card-expiry-year" type="text" size="4"
-		       placeholder="YY" style="width: 2.5em">
-	      </div>
+	      <!-- <div> -->
+	      <!-- 	<label>Expiry date (MM/YYYY)</label> -->
+	      <!-- 	<input id="r-i-card-expiry-month" type="text" size="2" -->
+	      <!-- 	       placeholder="MM" style="width: 2em"> -->
+	      <!-- 	<input id="r-i-card-expiry-year" type="text" size="4" -->
+	      <!-- 	       placeholder="YYYY" style="width: 3em"> -->
+	      <!-- </div> -->
 
-	      <div>
-		<label>CVC (three-digit number on reverse)</label>
-		<input id="r-i-cvc" type="text" size="4"
-		       placeholder="CVC" style="width: 2.5em">
-	      </div>
+	      <!-- <div> -->
+	      <!-- 	<label>CVC (three-digit number on reverse)</label> -->
+	      <!-- 	<input id="r-i-cvc" type="text" size="4" -->
+	      <!-- 	       placeholder="CVC" style="width: 2.5em"> -->
+	      <!-- </div> -->
 
-              <label>Email Address (Will be public)</label>
+              <label>Contact Email Address</label>
               <input id="r-i-email" type="text"
                      placeholder="Enter email address here"> <br/>
               <button id="r-i-submit" class="btn btn-primary btn-large"
-                      type="submit">Subscribe for £30/year
+                      type="submit">Subscribe using Paypal for £30/year
 		<p>
-		  <!-- <div style="font-size: small;">It's free!</div> -->
 	      </button>
+	      <img alt="Paypal" src="https://www.paypal.com/en_GB/i/bnr/vertical_solution_PP.gif">
             </form>
           </div>
 	</div>
@@ -149,18 +161,23 @@
       <!-- 	</div> -->
       </div>
 
+      <div id="checked-out" style="display: none">
+	You should now receive an email with a verification link that will let you
+	set up your account and password
+      </div>
+
       
       <div id="verify-email" class="row" style="display: none">
         <div class="offset4 span4 well">
           <h3>Verify Email Address</h3>
           <p>
-            Please type in your email again (security reasons) and set a
-            password and once you're verified you'll be ready to go!
+            Please type in your username and set a password and once you're
+            verified you'll be ready to go!
           </p>
           <form>
-            <label>Email Address</label>
+            <label>Username</label>
             <input id="v-e-email" type="text"
-                   placeholder="Enter your email address again here">
+                   placeholder="Enter your username here">
             <label>Password</label>
             <input id="v-e-password" type="password"
                    placeholder="Enter password here">
@@ -174,11 +191,11 @@
       <!-- Must be kept in sync with the version in bookmarklet.html -->
       <div id="login-form" class="row" style="display: none">
         <div class="offset4 span4 well">
-          <h3>Login to Recall</h3>
+          <h3>Sign in</h3>
           <form class="form-vertical">
-            <label>Email</label>
+            <label>Username</label>
             <input id="login-form-email" type="email"
-                   placeholder="Enter email address here">
+                   placeholder="Enter username here">
             <label>Password</label>
             <input id="login-form-password" type="password"
                    placeholder="Enter password here">
@@ -334,13 +351,6 @@
 	     >Privacy policy.</a>
 	</div>
       </div>
-
-    <!-- Javascript -->
-    <script type="text/javascript">
-      var PAYMILL_PUBLIC_KEY = '56668080487145b3fe9580713ad457b8';
-    </script>
-    <script type="text/javascript" src="https://bridge.paymill.com"
-	    defer="defer"></script>
 
     <script src="/core.js"></script>
     <script src="/sandbox.js"></script>
