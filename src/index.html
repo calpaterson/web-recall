@@ -25,7 +25,8 @@
           content="Search through your existing bookmarks, including their
 		   content within two minutes of signing up.">
     <meta name="author" content="Cal Paterson">
-
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Serif:400,700,400italic"
+	  rel="stylesheet" type="text/css">
     <link href="/third-party/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="/third-party/bootstrap/responsive.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
@@ -35,7 +36,6 @@
 
   <body>
     <div class="container">
-
       <div id="navigation" class="row"
 	   style="font-size: large; margin: 0.5em;
 		  margin-left: 30px">
@@ -52,193 +52,315 @@
 
       <div id="about" style="display: none">
 	<div class="row">
-	  <div class="span6"
-	       style="margin-top: 50px; margin-bottom: 50px; text-align:center">
-	    <h1>Search through your existing bookmarks, <em>including their contents</em>.</h1>
-	    <br/>
-	      Organising and navigating bookmarks is such a hassle that most
-	      people give up on using them because it's such a pain.  Recall
-	      lets you search your bookmarks and their contents, making it a
-	      snap to retrieve that page you bookmarked last month.
-	  </div>
-	<div id="request-invite-form">
-
-	  <div id="paypal-form" class="span3" style="text-align: center; display: none">
-	    Please now click through paypal to complete payment:
-
-	    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	      <input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="BJ3HHJF32SF7J">
-<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-	    </form>
-	  </div>
-
-          <div id="details-form" class="span3" style="text-align: center">
-            <form class="form-vertical">
-              <select id="r-i-type">
-		<option>Use my real name</option>
-		<option>Use a pseudonym</option>
-              </select>
-	      
-              <div id="r-i-real-name">
-		<label>First Name</label>
-		<input id="r-i-first-name" type="text"
-                       placeholder="Enter first name here">
-		<label>Surname</label>
-		<input id="r-i-surname" type="text"
-                       placeholder="Enter surname here">
-              </div>
-              <div id="r-i-pseudonym-div" style="display: none">
-		<label>Pseudonym</label>
-		<input id="r-i-pseudonym" type="text"
-                       placeholder="Enter pseudonym here">
-              </div>
-
-	      <!-- <div> -->
-	      <!-- 	<label>Card-holder's Name (exactly)</label> -->
-	      <!-- 	<input id="r-i-card-holder-name" type="text"/ -->
-	      <!-- 	       placeholder="Enter cardholder name here"> -->
-	      <!-- </div> -->
-
-	      <!-- <div> -->
-	      <!-- 	<label>Card number</label> -->
-	      <!-- 	<input id="r-i-card-number" type="text" size="20" -->
-	      <!-- 	       placeholder="Enter card number here"> -->
-	      <!-- </div> -->
-
-	      <!-- <div> -->
-	      <!-- 	<label>Expiry date (MM/YYYY)</label> -->
-	      <!-- 	<input id="r-i-card-expiry-month" type="text" size="2" -->
-	      <!-- 	       placeholder="MM" style="width: 2em"> -->
-	      <!-- 	<input id="r-i-card-expiry-year" type="text" size="4" -->
-	      <!-- 	       placeholder="YYYY" style="width: 3em"> -->
-	      <!-- </div> -->
-
-	      <!-- <div> -->
-	      <!-- 	<label>CVC (three-digit number on reverse)</label> -->
-	      <!-- 	<input id="r-i-cvc" type="text" size="4" -->
-	      <!-- 	       placeholder="CVC" style="width: 2.5em"> -->
-	      <!-- </div> -->
-
-              <label>Contact Email Address</label>
-              <input id="r-i-email" type="text"
-                     placeholder="Enter email address here"> <br/>
-              <button id="r-i-submit" class="btn btn-primary btn-large"
-                      type="submit">Subscribe using Paypal for £30/year
-		<p>
-	      </button>
-	      <img alt="Paypal" src="https://www.paypal.com/en_GB/i/bnr/vertical_solution_PP.gif">
-            </form>
-          </div>
-	</div>
-	</div>
-	  
-      <!-- 	<div class="row"> -->
-      <!-- 	  <div class="span4"> -->
-      <!-- 	    <h2>Saving your bookmarks in a web browser means you can't access them at home or work</h2> -->
-      <!-- 	    <ul> -->
-      <!-- 	      <li>Recall lets you search the <em>contents</em> -->
-      <!-- 		of your bookmarks, not just the titles! -->
-      <!-- 	      <li>Recall shows other bookmarks that also match what you're -->
-      <!-- 		looking for - useful if you've forgotten to add something -->
-      <!-- 	    </ul> -->
-      <!-- 	  </div> -->
-      <!-- 	  <div class="span4"> -->
-      <!-- 	    <h2>Share your bookmarks everywhere you go</h2> -->
-      <!-- 	    <ul> -->
-      <!-- 	      <li>Recall can import your existing bookmarks from any -->
-      <!-- 		web browser or from other services -->
-      <!-- 	    </ul> -->
-      <!-- 	  </div> -->
-      <!-- 	  <div class="span4"> -->
-      <!-- 	    <h2>Stop putting your bookmarks into complicated heirarchical folders and start <em>searching</em></h2> -->
-      <!-- 	    <ul> -->
-      <!-- 	      <li>Don't be tied to your browser - access and search through -->
-      <!-- 		your bookmarks from anywhere -->
-      <!-- 	    </ul> -->
-      <!-- 	  </div> -->
-      <!-- 	</div> -->
-      </div>
-
-      <div id="checked-out" style="display: none">
-	You should now receive an email with a verification link that will let you
-	set up your account and password
-      </div>
-
-      
-      <div id="verify-email" class="row" style="display: none">
-        <div class="offset4 span4 well">
-          <h3>Verify Email Address</h3>
-          <p>
-            Please type in your username and set a password and once you're
-            verified you'll be ready to go!
-          </p>
-          <form>
-            <label>Username</label>
-            <input id="v-e-email" type="text"
-                   placeholder="Enter your username here">
-            <label>Password</label>
-            <input id="v-e-password" type="password"
-                   placeholder="Enter password here">
-            <br/>
-            <button id="v-e-submit" class="btn btn-primary"
-                    data-loading-text="verifying...">Set Password</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Must be kept in sync with the version in bookmarklet.html -->
-      <div id="login-form" class="row" style="display: none">
-        <div class="offset4 span4 well">
-          <h3>Sign in</h3>
-          <form class="form-vertical">
-            <label>Username</label>
-            <input id="login-form-email" type="email"
-                   placeholder="Enter username here">
-            <label>Password</label>
-            <input id="login-form-password" type="password"
-                   placeholder="Enter password here">
-            <br/>
-            <button id="login-form-submit" class="btn btn-primary"
-                    type="submit">Login</button>
-          </form>
-        </div>
-      </div>
-
-      <div id="getting-started" style="display: none">
-	<div class="row">
 	  <div class="span12">
-	    <h2>Getting Started</h2>
+	    <h1 style="text-align:center">Introducing ⇐ Recall, the bookmark search engine</h1>
 	  </div>
 	</div>
-	
 	<div class="row">
-          <div class="span12">
-            <h3>Step 1: Import your existing bookmarks</h3>
-	    Any web browser and most social bookmarking services will
-	    allow you to export your bookmarks as an HTML file (sometimes
-	    this is called "Netscape Navigator" format).  You can import
-	    this file format into Recall here:
-            <form class="form-vertical">
-              <input id="m-i-bookmarks-file-input" type="file">
-              <br/>
-              <button id="m-i-import" class="btn btn-primary"
-                      type="submit">Import</button>
-            </form>
-          </div>
+	  <div class="span4">
+	    <h2>Browsers Aren't Great</h2>
+	    <p>
+	      <strong>Browsers make bookmarks hard.</strong>
+	    </p>
+	    <p>
+	      They can't search through your bookmarks.  You have to organise
+	      them around themes yourself if you want to be able to find
+	      anything later.  Browsers save bookmarks to the hard drive of the
+	      computer you're on.  If you want to see them on another computer
+	      later (say if you go home for the day) you're out of luck.
+	    </p>
+	    <p>
+	      The more bookmarks you have, the harder they are to use.  Finding
+	      that bookmark from earlier involves having to look through the
+	      browser menus for the title you saved it under.  You start having
+	      to delete bookmarks because you have so many that it's become
+	      unmanagable.
+	    </p>
+	    <p>
+	      Most people have basically given up on using bookmarks.  It's too
+	      hard.  Too fiddly.  Too annoying.  But it doesn't have to be this
+	      way.
+	    </p>
+	  </div>
+	  <div class="span4">
+	    <h2>Search is Great</h2>
+	    <p>
+	      Remember when the search engines became popular?  Suddenly, the
+	      web became useful.  Recall is a search engine.  It's a bit
+	      different through &mdash; it's designed to work with bookmarks.
+	    </p>
+	    <p>
+	      Every time you add a bookmark to Recall, it looks at the web
+	      page's text.  This text is added to a "search index".  Later,
+	      when you want to find things again you can do keywords search,
+	      just like Google.
+	    </p>
+	    <p>
+	      <strong>Searching makes it much easier to find things.</strong>
+	      Often, a search will turn up results you had forgotten about or
+	      didn't remember were on the same subject.
+	    </p>
+	    <p>
+	      It's also means that there's a lot less effort in trying to
+	      classify and organise things by hand.  A lot of time and effort
+	      is saved.
+	    </p>
+	  </div>
+	  <div class="span4">
+	    <h2>Using Recall is Easy</h2>
+	    <p>
+	      <strong>Recall could not be more straightforward to use</strong>.
+	      Bookmarks are saved with our special browser buttons &mdash;
+	      "bookmarklets" for most browsers and a Google Chrome extension.
+	      Adding Recall to your browser is a snap.
+	    </p>
+	    <figure>
+	      <a href="/bookmarklet.png">
+		<img src="/bookmarklet.png" alt="Bookmarklet">
+	      </a>
+	      <figcaption>Recall in Mozilla Firefox</figcaption>
+	    </figure>
+	    <figure>
+	      <a href="/google-chrome-extension.png">
+		<img src="/google-chrome-extension.png"
+		     alt="Google Chrome Extension">
+	      </a>
+	      <figcaption>Recall in Google Chrome</figcaption>
+	    </figure>
+	  </div>
 	</div>
-
 	<div class="row">
-          <div class="span12">
-	    <h3>Step 2: Install extension or bookmarklet</h3>
-	    If you're using Google Chrome, you can install a browser
-	    extension.  Other browsers can use this bookmarklet:
-            <a class="bookmarklet" id="bookmarklet-a" href="#"
-	       >mark this</a>
-          </div>
+	  <div class="span4">
+	    <h2>We Don't Sell Your Details</h2>
+	    <p>
+	      Recall is a purely subscription product.  We charge money for our
+	      product.  This makes us a bit different from traditional
+	      "dot-com" businesses.  They let anyone sign up for free and make
+	      their money by selling their "customers"' data and adverts to
+	      marketers.
+	    </p>
+	    <p>
+	      Recall has proper privacy, not confusing "permissions".  When you
+	      save a bookmark into Recall you can mark it as private.  If it's
+	      private, it won't appear to anyone else.  It's as simple as that.
+	    </p>
+	    <p>
+	      We care about your privacy in other ways too.  Recall asks for
+	      real names by default, but it doesn't insist.  You can sign up
+	      with a pseudonym (though you probably have to give your real name
+	      to Paypal).  In the future, we'll look at increasing this kind of
+	      pseudonym.
+	    </p>
+	  </div>
+	  <div class="span4">
+	    <h2>Never Lose Bookmarks Again</h2>
+	    <p>
+	      Losing data, of any kind, is extremely frustrating.
+	    </p>
+	    <p>
+	      Your bookmarks are incredibly personal.  They represent months,
+	      possibly years of reading and research.  How would you feel if
+	      you lost them?
+	    </p>
+	    <p>
+	      Most people do no backups whatsoever.  Of the few who do, it's
+	      doubtful that they rememeber to backup their bookmarks, which are
+	      kept inside the browser's program files, not with the rest of the
+	      important documents.
+	    </p>
+	    <p>
+	      <strong>Recall will handle the backups for you</strong>.
+	    </p>
+	  </div>
+	  <div class="span4">
+	    <h2>All Together</h2>
+	    <p>
+	      With web browser bookmarks, often, bookmarks get split up between
+	      different computers.  This becomes a pain, for example, when you
+	      want to look though the bookmarks you made at work when you're in
+	      bed with your iPad.  It also makes it harder to organise.  Did I
+	      save a copy of this already on another machine?
+	    </p>
+	    <p>
+	      Recall keeps everything together.  All of your bookmarks are
+	      stored in the same pool.  So you can search through everything
+	      you have no matter where you are.
+	    </p>
+	    <p>
+	      Your existing bookmarks can be imported into Recall.  We accept
+	      the "Netscape" bookmark file format, which every major browser
+	      can export into.  And if you're using something unusual, get in
+	      touch and we'll import it as a special job.
+	    </p>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="span4">
+	    <h2>No Crafty Adverts</h2>
+	    <p>
+	      Other search engines' "results" pages are one part results and two
+	      parts paid advertisement.  We don't take money from marketers.
+	      Our search results are always real results &mdash; and never
+	      crafty adverts designed to look like search results.
+	    </p>
+	    <p>
+	      <figure>
+		<a href="/ads.png">
+		  <img src="/ads.png" alt="Crafty adverts">
+		</a>
+		<figcaption>Traditional search engine "results"</figcaption>
+	      </figure>
+	    </p>
+	  </div>
+	  <div class="span4">
+	    <h2>We Guarantee You'll Like It</h2>
+	    <p>
+	      We care a lot about our customers.  We have every incentive to
+	      care, because unlike a lot of big technology companies, it's our
+	      customers who pay us.  As we've said, we don't sell our customers
+	      to advertisers.
+	    </p>
+	    <p>
+	      Recall, like most software, is not "done".  We're going to keep
+	      adding improvements and new features and we're going to survey
+	      our customers to find out which direction they'd like things to
+	      move it.
+	    </p>
+	    <p>
+	      We really hope that you like it.  But if you don't we'll refund
+	      your money <strong>any time for six months after you
+	      subscribe</strong>.
+	    </p>
+	  </div>
+	  <div class="span4">
+	    <h2>Subscribe for £39.99/year</h2>
+	    <div id="request-invite-form">
+	      <div id="paypal-form" class="span3" style="text-align: center; display: none">
+		Please now click through paypal to complete payment:
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+		  <input type="hidden" name="cmd" value="_s-xclick">
+		  <input type="hidden" name="hosted_button_id" value="BJ3HHJF32SF7J">
+		  <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif"
+			 border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+		  <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif"
+		       width="1" height="1">
+		</form>
+	      </div>
+
+              <div id="details-form" style="text-align: center">
+		<form class="form-vertical">
+		  <select id="r-i-type">
+		    <option>Use my real name</option>
+		    <option>Use a pseudonym</option>
+		  </select>
+	      
+		  <div id="r-i-real-name">
+		    <label>First Name</label>
+		    <input id="r-i-first-name" type="text"
+			   placeholder="Enter first name here">
+		    <label>Surname</label>
+		    <input id="r-i-surname" type="text"
+			   placeholder="Enter surname here">
+		  </div>
+		  <div id="r-i-pseudonym-div" style="display: none">
+		    <label>Pseudonym</label>
+		    <input id="r-i-pseudonym" type="text"
+			   placeholder="Enter pseudonym here">
+		  </div>
+		  <label>Contact Email Address</label>
+		  <input id="r-i-email" type="text"
+			 placeholder="Enter email address here"> <br/>
+		  <button id="r-i-submit" class="btn btn-primary btn-large"
+			  type="submit">Subscribe using Paypal for £39.99/year
+		    <p>
+		  </button>
+		  <img alt="Paypal" src="https://www.paypal.com/en_GB/i/bnr/vertical_solution_PP.gif">
+		</form>
+              </div>
+	    </div>
+	  </div>
 	</div>
       </div>
+    </div>
+
+    <div id="checked-out" style="display: none">
+      You should now receive an email with a verification link that will let you
+      set up your account and password
+    </div>
+    
+    
+    <div id="verify-email" class="row" style="display: none">
+      <div class="offset4 span4 well">
+        <h3>Verify Email Address</h3>
+        <p>
+          Please type in your username and set a password and once you're
+          verified you'll be ready to go!
+        </p>
+        <form>
+          <label>Username</label>
+          <input id="v-e-email" type="text"
+                 placeholder="Enter your username here">
+          <label>Password</label>
+          <input id="v-e-password" type="password"
+                 placeholder="Enter password here">
+          <br/>
+          <button id="v-e-submit" class="btn btn-primary"
+                  data-loading-text="verifying...">Set Password</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Must be kept in sync with the version in bookmarklet.html -->
+    <div id="login-form" class="row" style="display: none">
+      <div class="offset4 span4 well">
+        <h3>Sign in</h3>
+        <form class="form-vertical">
+          <label>Username</label>
+          <input id="login-form-email" type="email"
+                 placeholder="Enter username here">
+          <label>Password</label>
+          <input id="login-form-password" type="password"
+                 placeholder="Enter password here">
+          <br/>
+          <button id="login-form-submit" class="btn btn-primary"
+                  type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="getting-started" style="display: none">
+      <div class="row">
+	<div class="span12">
+	  <h2>Getting Started</h2>
+	</div>
+      </div>
+	
+      <div class="row">
+        <div class="span12">
+          <h3>Step 1: Import your existing bookmarks</h3>
+	  Any web browser and most social bookmarking services will
+	  allow you to export your bookmarks as an HTML file (sometimes
+	  this is called "Netscape Navigator" format).  You can import
+	  this file format into Recall here:
+          <form class="form-vertical">
+            <input id="m-i-bookmarks-file-input" type="file">
+            <br/>
+            <button id="m-i-import" class="btn btn-primary"
+                    type="submit">Import</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span12">
+	  <h3>Step 2: Install extension or bookmarklet</h3>
+	  If you're using Google Chrome, you can install a browser
+	  extension.  Other browsers can use this bookmarklet:
+          <a class="bookmarklet" id="bookmarklet-a" href="#"
+	     >mark this</a>
+        </div>
+      </div>
+    </div>
       
 
       <div id="search" style="display: none">
@@ -357,5 +479,6 @@
     <script src="/services.js"></script>
     <script src="/common_ui.js"></script>
     <script src="/recall.js"></script>
+    </div>
   </body>
 </html>

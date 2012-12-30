@@ -1,3 +1,35 @@
+/* Sticky footer hack */
+html, body {
+    height: 100%
+}
+
+#footer {
+    position: relative;
+    margin-top: -2em;
+    padding-top: 2em;
+    height: 2em;
+    clear: both;
+}
+
+/* Center and italise captions */
+figcaption {
+    text-align: center;
+    font-style: italic;
+}
+
+div#about p {
+    text-align: justify;
+}
+
+div#about h2 {
+    text-align: center;
+}
+
+div#about figure {
+    text-align: center;
+}
+
+/* Hide elements */
 .secret {
     display: none !important; 
 }
@@ -19,12 +51,6 @@ a:visited {
 
 .recall-show:visited {
     color: #0088cc;
-}
-
-#footer {
-    position:absolute;
-    bottom: 0;
-    height: 2em;
 }
 
 #footer .a-local {
