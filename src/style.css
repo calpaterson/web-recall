@@ -11,10 +11,14 @@ html, body {
     clear: both;
 }
 
-/* Center and italise captions */
+/* Landing page formatting */
 figcaption {
     text-align: center;
     font-style: italic;
+}
+
+div#about figure {
+    text-align: center;
 }
 
 div#about p {
@@ -22,10 +26,6 @@ div#about p {
 }
 
 div#about h2 {
-    text-align: center;
-}
-
-div#about figure {
     text-align: center;
 }
 
@@ -41,6 +41,7 @@ div#about figure {
     color: gray !important;
 }
 
+/* Underline links and turn them purple */
 a {
     text-decoration: underline;
 }
