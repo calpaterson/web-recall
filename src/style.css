@@ -29,6 +29,16 @@ div#about h2 {
     text-align: center;
 }
 
+/* Center videos on getting started page */
+div.video {
+    text-align: center
+}
+
+/* Bookmarklet formatting */
+#bookmarklet-a {
+    text-decoration: none;
+}
+
 /* Hide elements */
 .secret {
     display: none !important; 

@@ -27,7 +27,7 @@
     
     <link href="third-party/bootstrap/bootstrap.css"
           rel="stylesheet">
-    <link href="third-party/bootstrap/responsive.css"
+    <link href="third-party/bootstrap/bootstrap-responsive.css"
           rel="stylesheet">
     <link href="style.css" rol="stylesheet">
     <script src="/config.js"></script>
@@ -40,7 +40,7 @@
 
       <!-- Must be kept in sync with the version in bookmarklet.html -->
       <div id="login-form" class="row" style="display: none">
-        <div class="offset4 span4 well">
+        <div class="span12">
           <h3>Sign in</h3>
           <form class="form-vertical">
             <label>Username</label>
@@ -58,12 +58,12 @@
 
       <div id="bookmarklet" class="row" hidden="true">
 	<!-- Form view -->
-	<form id="form" class="tabbable">
+	<form id="form" class="tabbable span12">
 	  <!-- Tab bar -->
 	  <ul class="nav nav-pills">
             <li id="hyperlink-tab">
               <a href="#hyperlink-tab-content"
-		 class="tab" data-toggle="tab">Bookmark a web site</a>
+		 class="tab" data-toggle="tab">Bookmark a web page</a>
             </li>
             <!-- <li id="comment-tab"> -->
             <!--   <a href="#comment-tab-content" -->
@@ -75,15 +75,15 @@
 	  <div class="tab-content">
 	    <div class="tab-pane" id="comment-tab-content">
               <div>
-		<textarea id="comment-body" class="span4" autofocus="true"></textarea>
+		<textarea id="comment-body" class="span12" autofocus="true"></textarea>
               </div>
             </div>
             <div class="tab-pane" id="hyperlink-tab-content">
               <div>
-		<label>Title</label>
-		<input id="hyperlink-title" class="span4" type="text">
+		<label>Bookmark Title</label>
+		<input id="hyperlink-title" class="span12" type="text">
 		<label>URL</label>
-		<input id="hyperlink-url" class="span4" type="url">
+		<input id="hyperlink-url" class="span12" type="url">
               </div>
             </div>
 	  </div>
@@ -101,7 +101,7 @@
 		     checked="false">
 	    </p>
 	    <button id="mark-button" class="btn">
-              <i class="icon-ok"></i> Mark
+              <i class="icon-ok"></i> Save Bookmark
 	    </button>
 	  </div>
       </div>

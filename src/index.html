@@ -233,7 +233,7 @@
 	    </p>
 	  </div>
 	  <div class="span4">
-	    <h2>Subscribe for £39.99/year</h2>
+	    <h2>Subscribe for £29.99/year</h2>
 	    <div id="request-invite-form">
 	      <div id="paypal-form" class="span3" style="text-align: center; display: none">
 		Please now click through paypal to complete payment:
@@ -271,7 +271,7 @@
 		  <input id="r-i-email" type="text"
 			 placeholder="Enter email address here"> <br/>
 		  <button id="r-i-submit" class="btn btn-primary btn-large"
-			  type="submit">Subscribe using Paypal for £39.99/year
+			  type="submit">Subscribe using Paypal for £29.99/year
 		    <p>
 		  </button>
 		  <img alt="Paypal" src="https://www.paypal.com/en_GB/i/bnr/vertical_solution_PP.gif">
@@ -281,7 +281,6 @@
 	  </div>
 	</div>
       </div>
-    </div>
 
     <div id="checked-out" style="display: none">
       You should now receive an email with a verification link that will let you
@@ -328,37 +327,57 @@
       </div>
     </div>
 
-    <div id="getting-started" style="display: none">
-      <div class="row">
-	<div class="span12">
-	  <h2>Getting Started</h2>
-	</div>
-      </div>
-	
-      <div class="row">
-        <div class="span12">
-          <h3>Step 1: Import your existing bookmarks</h3>
+    <div id="getting-started" class="row" style="display: none">
+      <div class="span12">
+        <h2>Step 1: Import your existing bookmarks (if you have any)</h2>
+	<p>
 	  Any web browser and most social bookmarking services will
 	  allow you to export your bookmarks as an HTML file (sometimes
 	  this is called "Netscape Navigator" format).  You can import
 	  this file format into Recall here:
-          <form class="form-vertical">
-            <input id="m-i-bookmarks-file-input" type="file">
-            <br/>
+	<p>
+          <form action="#" class="form-vertical">
+            <input id="m-i-bookmarks-file-input" type="file"/>
             <button id="m-i-import" class="btn btn-primary"
                     type="submit">Import</button>
           </form>
-        </div>
-      </div>
+	</p>
+	<p>
+	  Please allow 24 hours for all of your imported bookmarks to appear in
+	  the search engine.  In normal use of Recall, bookmarks take only a
+	  few seconds to appear.
+	</p>
 
-      <div class="row">
-        <div class="span12">
-	  <h3>Step 2: Install extension or bookmarklet</h3>
-	  If you're using Google Chrome, you can install a browser
-	  extension.  Other browsers can use this bookmarklet:
-          <a class="bookmarklet" id="bookmarklet-a" href="#"
-	     >mark this</a>
-        </div>
+	<h2>Step 2: Install either the extension or the bookmarklet</h2>
+	<h3>On Google Chrome</h3>
+	<p>
+	  You can install the extension for your web browser from the Chrome
+	  Web Store
+	  <a alt="Download the extension from the Chrome Web Store"
+	     href="https://chrome.google.com/webstore/detail/recall/jcbfhaedomkmfcmjmophmglklealobio">
+	    here</a>
+	</p>
+	<h3>On Mozilla Firefox</h3>
+	<p>
+	  Drag the bookmarklet onto your bookmarks toolbar.  There is also a quick video
+	  showing <a href="/bookmarklet.webm">how to do this</a>
+	  (<a href="/bookmarklet.mp4">in two formats</a>).
+	</p>
+	<p id="bookmarklet-p">
+	  <a class="bookmarklet btn btn-inverse" id="bookmarklet-a" href="#"
+	     >bookmark this</a>
+	</p>
+	<p>
+	  If you're using Mozilla Firefox and you don't see your bookmarks
+	  toolbar you can unhide it in by going to the "View" menu, going the
+	  "Toolbars" submenu and clicking on "Bookmarks Toolbar".
+	</p>
+	<h2>Step 3: Bookmark some pages</h2>
+	<p>
+	  Whenever you visit a page that you want to save, use the bookmarklet
+	  or the Google Chrome extension to save it to Recall.  It will be
+	  added to the search engine automatically.
+	</p>
       </div>
     </div>
       
@@ -368,7 +387,7 @@
         <div class="row">
           <div class="span12">
             <form class="form-inline" style="text-align: center">
-              <input id="v-search-field" type="text" class="input-xxlarge">
+              <input id="v-search-field" type="text" class="offset4 span6">
               <button id="v-search-button"
 		      class="btn btn-primary">Search</button>
             </form>
