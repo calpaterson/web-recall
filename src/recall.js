@@ -570,7 +570,7 @@ core.add(
             
 
             sandbox.subscribe("show-post-login", function(){
-                moveTo("marks");
+                moveTo("getting-started");
             });
             
             sandbox.publish("logged-in?", {
