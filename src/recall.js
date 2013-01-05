@@ -176,6 +176,7 @@ core.add(
 	var sandbox;
 
 	var show = function(){
+	    mixpanel.track("Paid");
 	    var details = sandbox.get("details");
 	    sandbox.asynchronous(
                 function(status, content){
@@ -540,10 +541,12 @@ core.add(
 
         var vistorMode = function(){
             flip(vistorModeDisplay);
+	    mixpanel.track("Visit", {"Subscriber": false});
         };
 
         var userMode = function(){
             flip(userModeDisplay);
+	    mixpanel.track("Visit", {"Subscriber": true});
         };
 
         return function(sandbox_){
