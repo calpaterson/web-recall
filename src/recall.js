@@ -520,7 +520,7 @@ core.add(
 
         var vistorModeDisplay = {
             showing: ["#show-login", "#show-about"],
-            hiding: ["#show-getting-started", "#show-recent", "#logout"]
+            hiding: ["#show-getting-started", "#show-recent", "#show-search", "#logout"]
         };
 
         var userModeDisplay = {
