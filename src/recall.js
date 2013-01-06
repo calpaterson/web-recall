@@ -422,6 +422,8 @@ core.add(
     function(){
         var sandbox;
 
+	var email, password;
+
         var hide = function(){
 	    sandbox.hide()
             return false;
@@ -464,19 +466,52 @@ core.add(
             return mark;
         };
 
+        var authenticate = function(){
+            var authentication = function(email_, password_){
+                email = email_;
+                password = password_;
+            };
+            sandbox.publish("logged-in?", {"success": authentication,
+                                           "failure": function(){}});
+        };
+
         var importBookmarks = function(){
+	    // FIXME: Rewrite needed
             var button = sandbox.find("#m-i-import")[0];
+	    var failure = function() {
+		button.textContent = "Failure - please email your bookmarks to cal@calpaterson.com";
+	    }
+	    var handler = function (status, content){
+		if (status === 202){
+		    button.textContent = "Imported";
+		} else {
+		    failure();
+		}
+	    };
+	    authenticate();
 	    sandbox.addClass(button, "disabled");
             button.textContent = "Importing...";
-            var bookmarksFile = sandbox.find("#m-i-bookmarks-file-input")[0].files[0];
-            var reader = new FileReader();
-            reader.onload = function(event){
-                alert("bookmark import temporarily disabled");
-
-                button.textContent = "Imported!";
-            };
-            reader.readAsText(bookmarksFile, "UTF-8");
-            return false;
+	    if (typeof FileReader === "undefined"){
+		failure();
+	    } else {
+		var bookmarksFile = sandbox.find("#m-i-bookmarks-file-input")[0].files[0];
+		var reader = new FileReader();
+		reader.onload = function(event){
+		    var contents = event.currentTarget.result;
+		    sandbox.asynchronous(
+			handler,
+			"post",
+			sandbox.api() + "/bookmarks/" + email + "/",
+			contents,
+			null,
+			{"Content-Type": "text/html",
+			 "X-Email": email,
+			 "X-Password": password}
+		    )
+		};
+		reader.readAsText(bookmarksFile, "UTF-8");
+		return false;
+	    }
         };
 
         var insertJavasciptLink = function(){
