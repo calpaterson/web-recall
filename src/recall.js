@@ -19,22 +19,41 @@ core.add(
     function(){
         var sandbox;
 
-	var scrolledDownBefore = false;
+	var scrolled10PercentBefore = false;
+
+	var scrolled50PercentBefore = false;
+
+	var scrolled85PercentBefore = false;
 
 	var oldOnScroll = null;
-	
+
+	var start = null;
+
         var show = function(){
+	    start = new Date();
 	    sandbox.show()
 	    oldOnScroll = window.onscroll;
 	    window.onscroll = function(event){
-		if (!scrolledDownBefore){
-		    var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-		    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-		    var scrollDistance = (scrollTop / height) * 100;
-		    if(scrollDistance > 60){
-			mixpanel.track("Read 60% of About Page");
-			scrolledDownBefore = true;
-		    }
+		var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+		var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		var scrollDistance = (scrollTop / height) * 100;
+		if(scrollDistance > 10 && !scrolled10PercentBefore){
+		    var secondsTaken = (new Date() - start) / 1000;
+		    mixpanel.track("Scrolled 10%",
+				   {"Seconds Taken": secondsTaken});
+		    scrolled10PercentBefore = true;
+		}
+		if(scrollDistance > 50 && !scrolled50PercentBefore){
+		    var secondsTaken = (new Date() - start) / 1000;
+		    mixpanel.track("Scrolled 50%",
+				   {"Seconds Taken": secondsTaken});
+		    scrolled50PercentBefore = true;
+		}
+		if(scrollDistance > 85 && !scrolled85PercentBefore){
+		    var secondsTaken = (new Date() - start) / 1000;
+		    mixpanel.track("Scrolled 85%",
+				   {"Seconds Taken": secondsTaken});
+		    scrolled85PercentBefore = true;
 		}
 	    };
             return false;
