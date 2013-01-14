@@ -19,12 +19,29 @@ core.add(
     function(){
         var sandbox;
 
+	var scrolledDownBefore = false;
+
+	var oldOnScroll = null;
+	
         var show = function(){
 	    sandbox.show()
+	    oldOnScroll = window.onscroll;
+	    window.onscroll = function(event){
+		if (!scrolledDownBefore){
+		    var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+		    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		    var scrollDistance = (scrollTop / height) * 100;
+		    if(scrollDistance > 60){
+			mixpanel.track("Read 60% of About Page");
+			scrolledDownBefore = true;
+		    }
+		}
+	    };
             return false;
         };
 
         var hide = function(){
+	    window,onscroll = oldOnScroll;
 	    sandbox.hide();
             return false;
         };
