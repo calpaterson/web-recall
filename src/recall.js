@@ -21,16 +21,28 @@ core.add(
 
 	var scrolled10PercentBefore = false;
 
-	var scrolled50PercentBefore = false;
+	var scrolled35PercentBefore = false;
 
-	var scrolled85PercentBefore = false;
+	var scrolled65PercentBefore = false;
 
 	var oldOnScroll = null;
 
-	var start = null;
+	var start = new Date();
+
+	var startedScrolling = null;
+
+	var scrolledHalf = null;
+
+	var isNSecondsAgo = function(when_, n){
+	    if (when_ === null){
+		return false;
+	    }
+	    var when = when_.getTime();
+	    var nSecondsLater = when + (n * 1000);
+	    return (new Date().getTime()) > nSecondsLater;
+	};
 
         var show = function(){
-	    start = new Date();
 	    sandbox.show()
 	    oldOnScroll = window.onscroll;
 	    window.onscroll = function(event){
@@ -38,22 +50,26 @@ core.add(
 		var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 		var scrollDistance = (scrollTop / height) * 100;
 		if(scrollDistance > 10 && !scrolled10PercentBefore){
+		    startedScrolling = new Date();
 		    var secondsTaken = (new Date() - start) / 1000;
 		    mixpanel.track("Scrolled 10%",
 				   {"Seconds Taken": secondsTaken});
 		    scrolled10PercentBefore = true;
 		}
-		if(scrollDistance > 50 && !scrolled50PercentBefore){
-		    var secondsTaken = (new Date() - start) / 1000;
-		    mixpanel.track("Scrolled 50%",
+		if(scrollDistance > 35 && !scrolled35PercentBefore && isNSecondsAgo(startedScrolling, 10)){
+		    scrolledHalf = new Date();
+		    var secondsTaken = (new Date() - startedScrolling) / 1000;
+		    mixpanel.track("Read 35%",
 				   {"Seconds Taken": secondsTaken});
-		    scrolled50PercentBefore = true;
+		    scrolled35PercentBefore = true;
+		    alert("Read 35%");
 		}
-		if(scrollDistance > 85 && !scrolled85PercentBefore){
-		    var secondsTaken = (new Date() - start) / 1000;
-		    mixpanel.track("Scrolled 85%",
+		if(scrollDistance > 65 && !scrolled65PercentBefore && isNSecondsAgo(scrolledHalf, 10)){
+		    var secondsTaken = (new Date() - scrolledHalf) / 1000;
+		    mixpanel.track("Read 65%",
 				   {"Seconds Taken": secondsTaken});
-		    scrolled85PercentBefore = true;
+		    alert("Read 65%");
+		    scrolled65PercentBefore = true;
 		}
 	    };
             return false;
