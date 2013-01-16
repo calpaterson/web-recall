@@ -62,13 +62,11 @@ core.add(
 		    mixpanel.track("Read 35%",
 				   {"Seconds Taken": secondsTaken});
 		    scrolled35PercentBefore = true;
-		    alert("Read 35%");
 		}
 		if(scrollDistance > 65 && !scrolled65PercentBefore && isNSecondsAgo(scrolledHalf, 10)){
 		    var secondsTaken = (new Date() - scrolledHalf) / 1000;
 		    mixpanel.track("Read 65%",
 				   {"Seconds Taken": secondsTaken});
-		    alert("Read 65%");
 		    scrolled65PercentBefore = true;
 		}
 	    };
